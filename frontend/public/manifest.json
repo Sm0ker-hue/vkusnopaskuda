@@ -1,0 +1,31 @@
+{
+  "name": "ВкусноПаскуда! — FoodTech PWA",
+  "short_name": "VkusnoPaskuda",
+  "description": "Chytré recepty, optimalizovaný nákupní košík a živé akce českých supermarketů (Plzeň & ČR).",
+  "start_url": "/",
+  "id": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#18181b",
+  "theme_color": "#f59e0b",
+  "lang": "cs",
+  "categories": ["food", "shopping", "lifestyle"],
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}

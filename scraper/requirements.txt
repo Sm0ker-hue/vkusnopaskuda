@@ -1,0 +1,5 @@
+httpx>=0.24.1
+beautifulsoup4>=4.12.2
+selectolax>=0.3.16
+asyncio
+rapidfuzz>=3.0.0
