@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DishSearch } from '../components/dishes/DishSearch';
 import { DietaryFilters } from '../components/dishes/DietaryFilters';
@@ -8,19 +8,15 @@ import { useCartStore } from '../stores/cartStore';
 import { usePreferencesStore } from '../stores/preferencesStore';
 
 import { useRecipeStore } from '../stores/recipeStore';
+import { Utensils } from 'lucide-react';
 
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const { clear: clearInventory } = useInventoryStore();
   const { clear: clearCart } = useCartStore();
+  const { activeRecipeId, activeRecipeName } = useRecipeStore();
 
-  // Reset any previous dish inventory, cart items, and recipe state when returning to homepage
-  useEffect(() => {
-    clearInventory();
-    clearCart();
-    useRecipeStore.getState().clear();
-  }, [clearInventory, clearCart]);
 
   const handleSearch = async (query: string) => {
     // Clear inventory, cart, and recipe store when starting a new dish search
@@ -71,6 +67,36 @@ const HomePage: React.FC = () => {
       </div>
       
       <div className="w-full max-w-md space-y-4">
+        {activeRecipeId && (
+          <div className="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/25 flex items-center justify-between text-xs">
+            <div className="flex items-center space-x-2 text-zinc-300">
+              <Utensils className="w-4 h-4 text-amber-500 flex-shrink-0" />
+              <div>
+                <span className="text-amber-400 font-semibold block">Rozpracovaný recept:</span>
+                <span className="text-white font-medium truncate max-w-[200px] block">{activeRecipeName}</span>
+              </div>
+            </div>
+            <div className="flex items-center space-x-2">
+              <button
+                onClick={() => {
+                  clearInventory();
+                  clearCart();
+                  useRecipeStore.getState().clear();
+                }}
+                className="px-2 py-1.5 rounded-lg text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/80 transition-colors text-xs cursor-pointer"
+                title="Zrušit rozpracovaný recept"
+              >
+                Zrušit
+              </button>
+              <button
+                onClick={() => navigate(`/ingredients/${activeRecipeId}`)}
+                className="px-3 py-1.5 rounded-lg bg-amber-500 text-zinc-950 font-bold hover:bg-amber-400 transition-colors cursor-pointer text-xs flex-shrink-0"
+              >
+                Pokračovat →
+              </button>
+            </div>
+          </div>
+        )}
         <DishSearch onSearch={handleSearch} isLoading={loading} />
         {/* Dietary preferences and Czech allergens 1-14 */}
         <DietaryFilters />

@@ -67,6 +67,12 @@ const ShoppingPage: React.FC = () => {
 
   const { activeRecipeName, activeIngredients } = useRecipeStore();
 
+  useEffect(() => {
+    if (variationId && useRecipeStore.getState().activeRecipeId !== variationId) {
+      useRecipeStore.getState().setActiveRecipeId(variationId);
+    }
+  }, [variationId]);
+
   const currentIngredients = useMemo(() => {
     if (activeIngredients && activeIngredients.length > 0) {
       return activeIngredients;

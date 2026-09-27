@@ -42,6 +42,9 @@ const IngredientsPage: React.FC = () => {
 
   useEffect(() => {
     if (variationId) {
+      if (useRecipeStore.getState().activeRecipeId !== variationId) {
+        useRecipeStore.getState().setActiveRecipeId(variationId);
+      }
       initForVariation(variationId);
 
       const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(variationId);

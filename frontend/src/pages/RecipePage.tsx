@@ -39,6 +39,9 @@ const RecipePage: React.FC = () => {
 
   useEffect(() => {
     if (variationId) {
+      if (useRecipeStore.getState().activeRecipeId !== variationId) {
+        useRecipeStore.getState().setActiveRecipeId(variationId);
+      }
       if (activeRecipeName) {
         setRecipeTitle(activeRecipeName);
       }
