@@ -12,7 +12,12 @@ import json
 from pathlib import Path
 from datetime import datetime
 
-sys.stdout.reconfigure(encoding="utf-8")
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+
+backend_dir = str(Path(__file__).parent.resolve())
+if backend_dir not in sys.path:
+    sys.path.insert(0, backend_dir)
 
 from pydantic import ValidationError
 from app.database import AsyncSessionLocal

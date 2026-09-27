@@ -30,6 +30,7 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           SECRET_KEY: ${{ secrets.SECRET_KEY || 'ci-testing-secret-key-123456789012' }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          PYTHONPATH: ./backend
         run: |
           python backend/verify_all_features.py
 

@@ -10,3 +10,4 @@ psycopg2-binary>=2.9.9
 google-genai>=1.0.0
 rapidfuzz>=3.0.0
 beautifulsoup4>=4.12.2
+greenlet>=3.0.0
